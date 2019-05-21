@@ -1,1 +1,31 @@
 repoVisibility: private_12E5349CFB8BBA30AF464C24760B70343C0EAE9E9BD99156345DD0852C2E0F6F
+leakDetectionExemptions:
+ - ruleId: 'aws_2'
+   filePaths:
+      - '/test_filecontent.py'     
+      - '/secrets_filecontent.py'
+      - '/secrets_filename.py'
+    
+ - ruleId: 'cert_1'
+   filePaths:
+      - '/test_filecontent.py'     
+      - '/secrets_filecontent.py'
+      - '/secrets_filename.py'
+
+ - ruleId: 'application_secret'
+   filePaths:
+      - '/test_filecontent.py'     
+      - '/secrets_filecontent.py'
+      - '/secrets_filename.py'
+    
+ - ruleId: 'cookie_deviceID_secret'
+   filePaths:
+      - '/test_filecontent.py'     
+      - '/secrets_filecontent.py'
+      - '/secrets_filename.py'
+
+ - ruleId: 'sso_encryption_key'
+   filePaths:
+      - '/test_filecontent.py'     
+      - '/secrets_filecontent.py'
+      - '/secrets_filename.py'
