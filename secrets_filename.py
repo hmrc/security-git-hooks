@@ -35,26 +35,33 @@ file_name_regexes = {
 compiled_file_name_regexes = {}
 
 for regex in file_name_regexes:
-    compiled_file_name_regexes[regex] = re.compile(file_name_regexes[regex])
+    try:
+        compiled_file_name_regexes[regex] = re.compile(file_name_regexes[regex])
+    except:
+        print("Rule:", regex, "failed to compile. This will not be tested against the file(s)\n")
 
 
-def detect_file_match(argument):
+def detect_file_match(files_to_check):
+    '''checks argument against compiled regexes'''
     for regex in compiled_file_name_regexes:
-        if re.search(compiled_file_name_regexes[regex], argument):
+        if re.search(compiled_file_name_regexes[regex], files_to_check):
             return regex
 
 def main(argv=None):
+    '''parses filenames and provides outut'''
+
+    #note - if manually passed a directory as argument, checks are not recursive. Git adds files individually. 
     parser = argparse.ArgumentParser()
     parser.add_argument('filenames', nargs='*', help='Files to check')
     args = parser.parse_args(argv)
-    #print("DEBUG - Testing ", args.filenames)
-
+    exit_code = 0
 
     for filename in args.filenames:
-            rule = detect_file_match(filename)
-            if rule:
-                print('{} may contain sensitive information'.format(filename))
-    return(1)
-
+        rule = detect_file_match(filename)
+        if rule:
+            exit_code = 1
+            print('{} may contain sensitive information'.format(filename))
+    return exit_code
+    
 if __name__ == '__main__':
     sys.exit(main())

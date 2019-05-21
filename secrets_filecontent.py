@@ -34,7 +34,10 @@ file_name_regexes = {
 compiled_file_content_regexes = {}
 
 for regex in file_content_regexes:
-    compiled_file_content_regexes[regex] = re.compile(file_content_regexes[regex])
+    try:
+        compiled_file_content_regexes[regex] = re.compile(file_content_regexes[regex])
+    except:
+        print("Rule:", regex, "failed to compile. This will not be tested against the file(s)\n")
 
 
 def detect_secret_in_line(argument):
@@ -47,14 +50,20 @@ def main(argv=None):
     parser = argparse.ArgumentParser()
     parser.add_argument('filenames', nargs='*', help='Files to check')
     args = parser.parse_args(argv)
+    exit_code = 0
 
     for filename in args.filenames:
-        with open(filename, 'r') as f:
-            for i, line in enumerate(f):
-                rule = detect_secret_in_line(line)
-                if rule:
-                    print('Found on line {linenum} of {file}: {rule}'.format(linenum= i+1, file= filename, rule=rule))
-    return(1)
+        print("DEBUG - DOUBLE?")
+        try:
+            with open(filename, 'r') as f:
+                for i, line in enumerate(f):
+                    rule = detect_secret_in_line(line)
+                    if rule:
+                        print('**************Found on line {line_number} of {file}: {rule}'.format(line_number= i+1, file= filename, rule=rule))
+                        exit_code=1
+        except:
+            print("File: ", filename, " encountered an error and was not tested")
+    return exit_code
 
 
 if __name__ == '__main__':
