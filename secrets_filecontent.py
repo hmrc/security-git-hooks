@@ -5,7 +5,7 @@ import sys
 import re
 
 file_content_regexes = {
-    "aws_2 ": "(?:aws).{0,100}?(:|=|=>|->)\s*\"?(?<![A-Za-z0-9\/+=])[A-Za-z0-9\/+=]{40}(?![A-Za-z0-9\/+=])\"?",
+    "aws_2": "(?:aws).{0,100}?(:|=|=>|->)\s*\"?(?<![A-Za-z0-9\/+=])[A-Za-z0-9\/+=]{40}(?![A-Za-z0-9\/+=])\"?",
     "cert_1": "-----(BEGIN|END).*?PRIVATE.*?-----",
     "application_secret": "application\.secret\s*(=|:|->)\s*(?!(\s*ENC\[))",
     "play_crypto_secret": "play\.crypto\.secret\s*(=|:|->)\s*(?!(\s*ENC\[))",
@@ -40,9 +40,9 @@ for regex in file_content_regexes:
         print("Rule:", regex, "failed to compile. This will not be tested against the file(s)\n")
 
 
-def detect_secret_in_line(argument):
+def detect_secret_in_line(line_to_check):
     for regex in compiled_file_content_regexes:
-        if re.search(compiled_file_content_regexes[regex], argument):
+        if re.search(compiled_file_content_regexes[regex], line_to_check):
             return regex
 
 
@@ -53,14 +53,13 @@ def main(argv=None):
     exit_code = 0
 
     for filename in args.filenames:
-        print("DEBUG - DOUBLE?")
         try:
             with open(filename, 'r') as f:
                 for i, line in enumerate(f):
                     rule = detect_secret_in_line(line)
                     if rule:
-                        print('**************Found on line {line_number} of {file}: {rule}'.format(line_number= i+1, file= filename, rule=rule))
-                        exit_code=1
+                        print('Found on line {line_number} of {file}: {rule}'.format(line_number= i+1, file= filename, rule=rule))
+                        exit_code = 1
         except:
             print("File: ", filename, " encountered an error and was not tested")
     return exit_code
