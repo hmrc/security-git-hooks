@@ -16,6 +16,7 @@ _FILE_NAME_REGEXES = {
     "dsa": "_dsa$",
     "ed25519": "_ed25519$",
     "ecdsa": "_ecdsa$",
+    "jks": "\.jks$",
     "bash/zsh rc file": "^\.?(bash|zsh)?rc$",
     "bash/zsh profile": "^\.?(bash|zsh)_profile$",
     "bash/zsh aliases file": "^\.?(bash|zsh)_aliases$",
@@ -24,6 +25,12 @@ _FILE_NAME_REGEXES = {
     "Apple Keychain file": "^\.*keychain$",
     "Keystore/Keyring file": "^key(store|ring)$"
     }
+
+for regex in _FILE_NAME_REGEXES:
+    try:
+        re.compile(_FILE_NAME_REGEXES[regex])
+    except:
+        raise 
 
 
 def detect_match_against_filename(files_to_check):
@@ -41,19 +48,11 @@ def main(argv=None):
     args = parser.parse_args(argv)
     exit_code = 0
 
-    compiled_file_name_regexes = {}
-
-    for regex in _FILE_NAME_REGEXES:
-        try:
-            compiled_file_name_regexes[regex] = re.compile(_FILE_NAME_REGEXES[regex])
-        except:
-            print("Rule:", regex, "failed to compile. This will not be tested against the file(s)\n")
-
     for filename in args.filenames:
         match = detect_match_against_filename(filename)
         if match:
             exit_code = 1
-           # print('{} may contain sensitive information'.format(filename))
+            print('{} may contain sensitive information'.format(filename))
     return exit_code
     
 if __name__ == '__main__':

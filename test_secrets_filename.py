@@ -102,10 +102,9 @@ def test_ecdsa_public_key_does_not_match():
 
 
 # filename_private_key_11
-@pytest.mark.skip(reason="add to dict")
 def test_jks_extension_match():
     filename = "fake.jks"
-    assert secrets_filename.detect_match_against_filename(filename) == "jks"
+    assert secrets_filename.detect_match_against_filename(filename) == "\.jks$"
 
 
 def test_jks_in_filename_does_not_match():
