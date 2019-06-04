@@ -15,7 +15,10 @@ _FILE_CONTENT_REGEXES = {
 
 
 for regex in _FILE_CONTENT_REGEXES:
-    re.compile(_FILE_CONTENT_REGEXES[regex])
+    try:
+        re.compile(_FILE_CONTENT_REGEXES[regex])
+    except:
+        raise
 
 
 def handle_line_to_skip(line_to_skip):
