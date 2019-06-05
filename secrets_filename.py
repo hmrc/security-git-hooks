@@ -3,28 +3,11 @@
 import argparse
 import sys
 import re
+from conf import _FILE_NAME_REGEXES
 
 """Parse the files in a github commit for potentially sensitive filenames, per rules 
 defined at https://github.com/hmrc/app-config-base/blob/master/leak-detection.conf"""
 
-_FILE_NAME_REGEXES = {
-    "p12": r"\.p12$",
-    "pfx": r"\.pfx$",
-    "pkcs12": r"\.pkcs12$",
-    "pem": r"\.pem$",
-    "rsa": r"_rsa$",
-    "dsa": r"_dsa$",
-    "ed25519": r"_ed25519$",
-    "ecdsa": r"_ecdsa$",
-    "jks": r"\.jks$",
-    "bash/zsh rc file": r"^\.?(bash|zsh)?rc$",
-    "bash/zsh profile": r"^\.?(bash|zsh)_profile$",
-    "bash/zsh aliases file": r"^\.?(bash|zsh)_aliases$",
-    "credential(s) file": r"^\.credential(s)?$",
-    "Github Enterprise file": r"^\.githubenterprise$",
-    "Apple Keychain file": r"^\.*keychain$",
-    "Keystore/Keyring file": r"^key(store|ring)$",
-}
 
 for regex in _FILE_NAME_REGEXES:
     try:
@@ -53,7 +36,7 @@ def main(argv=None):
         match = detect_match_against_filename(filename)
         if match:
             exit_code = 1
-            print("{} may contain sensitive information".format(filename))
+            print("{file} may contain sensitive information due to the file typeg".format(file = filename))
     return exit_code
 
 
