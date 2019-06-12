@@ -1,3 +1,4 @@
+repos:
 -   repo: https://github.com/hmrc/security-git-hooks
     rev: test1
     hooks:
@@ -6,7 +7,6 @@
         files: ''
         language: python
         pass_filenames: true
-        entry: ./secrets_filecontent.py
         exclude: ".tar$|.gz$|.jar$|.7z$|.rar$|.bz2$|.zip$|.gzip$|.war$|.ear$|.xlsx$|.xls$|
                 |.docx$|.doc$|.pptx$|.pdf$|.jpg$|.png$|.jpeg$|.tif$|.tiff$|.gif$|.bmp$|.webp$|.svg$|.ico$|.psd$|.exe$|.dll$|.dmg$|.de$|.rpm$"
     -   id: secrets_filename
@@ -14,7 +14,6 @@
         files: ''
         language: python
         pass_filenames: true
-        entry: ./secrets_filename.py
         exclude: ".tar$|.gz$|.jar$|.7z$|.rar$|.bz2$|.zip$|.gzip$|.war$|.ear$|.xlsx$|.xls$|
                 |.docx$|.doc$|.pptx$|.pdf$|.jpg$|.png$|.jpeg$|.tif$|.tiff$|.gif$|.bmp$|.webp$|.svg$|.ico$|.psd$|.exe$|.dll$|.dmg$|.de$|.rpm$"
 
