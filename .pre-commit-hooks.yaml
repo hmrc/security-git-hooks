@@ -2,10 +2,10 @@
     name: Check filenames for potential secrets
     description: 'Check filenames for potential secrets'
     language: python
-    entry: secrets_filename.py
+    entry: secrets_filename
 
 -   id: secrets_filecontent
     name: Check file content for potential secrets
     description: 'Check file content for potential secrets'
     language: python
-    entry: secrets_filecontent.py
+    entry: secrets_filecontent
