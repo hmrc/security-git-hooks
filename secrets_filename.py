@@ -36,7 +36,11 @@ def main(argv=None):
         match = detect_match_against_filename(filename)
         if match:
             exit_code = 1
-            print("{file} may contain sensitive information due to the file typeg".format(file = filename))
+            print(
+                "{file} may contain sensitive information due to the file type".format(
+                    file=filename
+                )
+            )
     return exit_code
 
 

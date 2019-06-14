@@ -40,8 +40,8 @@ def main(argv=None):
                 rule = detect_secret_in_line(line)
                 if rule:
                     print(
-                        "Potentially sensitive string ({rule}) found on line {line_number} of {file}".format(
-                            rule=rule, line_number=i + 1, file=filename 
+                        "Potentially sensitive string matching rule: {rule} found on line {line_number} of {file}".format(
+                            rule=rule, line_number=i + 1, file=filename
                         )
                     )
                     exit_code = 1
