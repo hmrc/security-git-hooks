@@ -1,0 +1,73 @@
+repoVisibility: private_12E5349CFB8BBA30AF464C24760B70343C0EAE9E9BD99156345DD0852C2E0F6F
+leakDetectionExemptions:
+ - ruleId: 'aws_2'
+   filePaths:
+      - '/test_secrets_filecontent.py'
+      - '/test_secrets_filename.py'
+      - '/unit_tests/test_secrets_filecontent.py'
+      - '/unit_tests/test_secrets_filename.py'
+      - '/security_git_hooks/unit_tests/test_secrets_filecontent.py'
+      - '/security_git_hooks/unit_tests/test_secrets_filename.py'
+      - '/secrets_filecontent.py'
+      - '/secrets_filename.py'
+      - '/conf.yaml'
+    
+ - ruleId: 'cert_1'
+   filePaths:
+      - '/test_secrets_filecontent.py'
+      - '/test_secrets_filename.py'
+      - '/unit_tests/test_secrets_filecontent.py'
+      - '/unit_tests/test_secrets_filename.py'
+      - '/security_git_hooks/unit_tests/test_secrets_filecontent.py'
+      - '/security_git_hooks/unit_tests/test_secrets_filename.py'
+      - '/secrets_filecontent.py'
+      - '/secrets_filename.py'
+      - '/conf.yaml'
+
+ - ruleId: 'application_secret'
+   filePaths:
+      - '/test_secrets_filecontent.py'
+      - '/test_secrets_filename.py'
+      - '/unit_tests/test_secrets_filecontent.py'
+      - '/unit_tests/test_secrets_filename.py'
+      - '/security_git_hooks/unit_tests/test_secrets_filecontent.py'
+      - '/security_git_hooks/unit_tests/test_secrets_filename.py'
+      - '/secrets_filecontent.py'
+      - '/secrets_filename.py'
+      - '/conf.yaml'
+    
+ - ruleId: 'cookie_deviceId_secret'
+   filePaths:
+      - '/test_secrets_filecontent.py'
+      - '/test_secrets_filename.py'
+      - '/unit_tests/test_secrets_filecontent.py'
+      - '/unit_tests/test_secrets_filename.py'
+      - '/security_git_hooks/unit_tests/test_secrets_filecontent.py'
+      - '/security_git_hooks/unit_tests/test_secrets_filename.py'
+      - '/secrets_filecontent.py'
+      - '/secrets_filename.py'
+      - '/conf.yaml'
+
+ - ruleId: 'sso_encryption_key'
+   filePaths:
+      - '/test_secrets_filecontent.py'
+      - '/test_secrets_filename.py'
+      - '/unit_tests/test_secrets_filecontent.py'
+      - '/unit_tests/test_secrets_filename.py'
+      - '/security_git_hooks/unit_tests/test_secrets_filecontent.py'
+      - '/security_git_hooks/unit_tests/test_secrets_filename.py'
+      - '/secrets_filecontent.py'
+      - '/secrets_filename.py'
+      - '/conf.yaml'
+ 
+ - ruleId: 'play_crypto_secret'
+   filePaths:
+      - '/test_secrets_filecontent.py'
+      - '/test_secrets_filename.py'
+      - '/unit_tests/test_secrets_filecontent.py'
+      - '/unit_tests/test_secrets_filename.py'
+      - '/security_git_hooks/unit_tests/test_secrets_filecontent.py'
+      - '/security_git_hooks/unit_tests/test_secrets_filename.py'
+      - '/secrets_filecontent.py'
+      - '/secrets_filename.py'
+      - '/conf.yaml'

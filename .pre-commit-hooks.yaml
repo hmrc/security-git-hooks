@@ -1,0 +1,12 @@
+-   id: secrets_filename
+    name: Check filenames for potential secrets
+    description: 'Check filenames for potential secrets'
+    language: python
+    entry: security-git-hooks-filecontent
+
+-   id: secrets_filecontent
+    name: Check file content for potential secrets
+    description: 'Check file content for potential secrets'
+    language: python
+    entry: security-git-hooks-filename
+
