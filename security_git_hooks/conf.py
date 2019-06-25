@@ -1,6 +1,6 @@
 import os
 import pkg_resources
-import yaml 
+import yaml
 import re
 
 CONF_YAML = pkg_resources.resource_string(__name__, "conf.yaml")
@@ -13,4 +13,8 @@ def validate_expressions(MEOW):
         try:
             re.compile(regex)
         except re.error:
-            print("{rule} failed to compile and has not been tested against the staged files".format(rule=rule))
+            print(
+                "{rule} failed to compile and has not been tested against the staged files".format(
+                    rule=rule
+                )
+            )

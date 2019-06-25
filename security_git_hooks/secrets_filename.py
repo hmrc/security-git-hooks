@@ -12,7 +12,7 @@ defined at https://github.com/hmrc/app-config-base/blob/master/leak-detection.co
 
 def detect_match_against_filename(files_to_check):
     """checks argument against compiled regexes"""
-    for rule, regex in yaml.safe_load(conf.CONF_YAML)['FILE_NAME_REGEXES'].items():
+    for rule, regex in yaml.safe_load(conf.CONF_YAML)["FILE_NAME_REGEXES"].items():
         if re.search(regex, files_to_check):
             return regex
 
@@ -21,7 +21,7 @@ def main(argv=None):
     """Parses filenames and provides outut.
     Note that if manually passed a directory as argument, checks are not recursive as Git 
     adds files to a commit individually."""
-    conf.validate_expressions('FILE_NAME_REGEXES')
+    conf.validate_expressions("FILE_NAME_REGEXES")
     parser = argparse.ArgumentParser()
     parser.add_argument("filenames", nargs="*", help="Files to check")
     args = parser.parse_args(argv)

@@ -4,18 +4,20 @@ import argparse
 import sys
 import re
 import yaml
-#from . import conf
+
+# from . import conf
 import conf
+
 
 def detect_secret_in_line(line_to_check):
     """compiles regex and checks against line."""
-    for rule, regex in yaml.safe_load(conf.CONF_YAML)['FILE_CONTENT_REGEXES'].items():
+    for rule, regex in yaml.safe_load(conf.CONF_YAML)["FILE_CONTENT_REGEXES"].items():
         if re.search(re.compile(regex), line_to_check):
             return rule
 
 
 def main(argv=None):
-    conf.validate_expressions('FILE_CONTENT_REGEXES')
+    conf.validate_expressions("FILE_CONTENT_REGEXES")
     parser = argparse.ArgumentParser()
     parser.add_argument("filenames", nargs="*", help="Files to check")
     args = parser.parse_args(argv)
