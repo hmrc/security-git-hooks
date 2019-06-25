@@ -4,8 +4,8 @@ import argparse
 import sys
 import re
 import yaml
-from . import conf
-
+#from . import conf
+import conf
 
 def detect_secret_in_line(line_to_check):
     """compiles regex and checks against line."""

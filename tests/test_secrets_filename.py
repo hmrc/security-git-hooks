@@ -1,5 +1,5 @@
 import pytest
-import secrets_filename
+from security_git_hooks import secrets_filename
 import re
 
 """All comments at beginning of test sets correspond to id of leak detection rules per
