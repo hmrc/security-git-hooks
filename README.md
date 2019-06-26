@@ -47,7 +47,7 @@ If you wish to run hooks without committing, pre-commit can be used as a general
 
 You can forgo the pre-commit hooks entirely by use of the `--no-verify` flag, although due to the relationship between the `secrets-filename` and `secrets-filecontent` hooks and the Leak Detection Service, an LDS alert will be triggered by the commit for any files not on the exemption list contained within your `repository.yaml` file.
 
-You can automatically update hooks to point directly at the latest tagged version of a hook by using `pre-commit autoupdate`, or alternatively, `pre-commit autoupdate --bleeding-edge` will point at the latest version
+You can automatically update hooks to point directly at the latest tagged version of a hook by using `pre-commit autoupdate`, or alternatively, `pre-commit autoupdate --bleeding-edge` will point at the latest version of master.
 
 ### Installing other hooks or writing your own
 
