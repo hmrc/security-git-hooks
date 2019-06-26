@@ -8,8 +8,8 @@ CONF_YAML = pkg_resources.resource_string(__name__, "conf.yaml")
 IGNORE_KEYWORD = "pre-commit-ignore"
 
 
-def validate_expressions(MEOW):
-    for regex in yaml.safe_load(CONF_YAML)[MEOW].values():
+def validate_expressions(ITEM):
+    for regex in yaml.safe_load(CONF_YAML)[ITEM].values():
         try:
             re.compile(regex)
         except re.error:
