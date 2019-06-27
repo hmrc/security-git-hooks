@@ -11,6 +11,7 @@ leakDetectionExemptions:
       - '/secrets_filecontent.py'
       - '/secrets_filename.py'
       - '/conf.yaml'
+      - '/README.md'
     
  - ruleId: 'cert_1'
    filePaths:
@@ -23,6 +24,7 @@ leakDetectionExemptions:
       - '/secrets_filecontent.py'
       - '/secrets_filename.py'
       - '/conf.yaml'
+      - '/README.md'
 
  - ruleId: 'application_secret'
    filePaths:
@@ -35,6 +37,7 @@ leakDetectionExemptions:
       - '/secrets_filecontent.py'
       - '/secrets_filename.py'
       - '/conf.yaml'
+      - '/README.md'
     
  - ruleId: 'cookie_deviceId_secret'
    filePaths:
@@ -47,6 +50,7 @@ leakDetectionExemptions:
       - '/secrets_filecontent.py'
       - '/secrets_filename.py'
       - '/conf.yaml'
+      - '/README.md'
 
  - ruleId: 'sso_encryption_key'
    filePaths:
@@ -59,7 +63,8 @@ leakDetectionExemptions:
       - '/secrets_filecontent.py'
       - '/secrets_filename.py'
       - '/conf.yaml'
- 
+      - '/README.md'
+
  - ruleId: 'play_crypto_secret'
    filePaths:
       - '/test_secrets_filecontent.py'
@@ -71,3 +76,4 @@ leakDetectionExemptions:
       - '/secrets_filecontent.py'
       - '/secrets_filename.py'
       - '/conf.yaml'
+      - '/README.md'
