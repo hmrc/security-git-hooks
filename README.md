@@ -62,3 +62,4 @@ Pre-commit hooks themselves can be written in any language, however for a list o
 `secrets-filecontent` - Checks against the LDS file content ruleset as defined [here](https://github.com/hmrc/app-config-base/blob/master/leak-detection.conf#L92)
 
 You can test the hooks by cloning this repository and running `pytest` in the root directory.
+
