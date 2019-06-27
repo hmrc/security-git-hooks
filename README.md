@@ -38,6 +38,22 @@ In order to quickly check if everything is working as expected, test with:
 * Change into your selected repository.
 * Create a dummy file to test the file type check: `touch fake.key.pem`
 * Create a dummy file to test the file content check: `echo aws_secret_access_key = 1ye+VarkHMg7o6MNjwWIqOYICe03lfA+KPPAmeaY > fake.aws.file`
+* Test with: `git add -A && git commit -m 'testing pre-commits'
+
+You should see the following output:
+```
+$ git add -A && git commit -m 'testing pre-commits'
+Check file content for potential secrets.................................Failed
+hookid: secrets_filecontent
+
+fake.key.pem may contain sensitive information due to the file type
+
+Check filenames for potential secrets....................................Failed
+hookid: secrets_filename
+
+Potentially sensitive string matching rule: aws_2 found on line 1 of fake.aws.file
+
+```
 
 ### Definitions
 * `repo` - Points to the repository containing the hook(s). Can be set to `local` for running/testing your own hooks, although additional information (which wouold usually be included in the `.pre-commit-hooks.yaml` is required if this is the case).
