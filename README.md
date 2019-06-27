@@ -1,24 +1,24 @@
 # security-git-hooks
 
-The purpose of these pre-commit hooks is to check file types and content against pre-defined rules in order to identify potential secrets in GitHub commits. Managing sensitive content before it is committed can prevent the Leak Detection Service triggering an alert, and reduces the potential for secrets requiring manual removal from Git histories. Please note that, at the time of writing, these hooks do not check for the presence of a `repository.yaml` file, and have no relationship with the LDS exclusions defined there.
+The purpose of these pre-commit Git hooks is to check file types and content against pre-defined fixed rules in order to identify potential sensitive information in Git commits. Managing sensitive content before it is committed to GitHub helps in maintaining our overall security posture.  As a secondary bonus, it also helps prevent the Leak Detection Service (LDS) triggering an alert and reduces the potential for secrets requiring manual removal from the Git history or keys require cycling.  
 
-### Installing the pre-commit framework
+*NOTE:* These hooks do not check for the presence of a `repository.yaml` file and have no relationship with the LDS exclusions defined there.
 
-We have opted to fork the pre-commit project and advise members of the HMRC organisation to install from our source. Instructions for installing the framework directly from the maintainer can be found at  the [pre-commit website](https://pre-commit.com/).
+## Installation
 
-In order to install per our recommendation: 
+We have opted to fork the [pre-commit](https://pre-commit.com/) project into HMRCs GitHub account so that we have control over what is allowed to be commited.  
+Installation steps as follow:
 
-* Clone [this fork](https://github.com/hmrc/pre-commit)
-* Navigate to the root of the pre-commit repository on your machine, and run `pip install . `
+* Clone [pre-commit](https://github.com/hmrc/pre-commit) with: `git clone https://github.com/hmrc/pre-commit`
+* Navigate to the root of the `pre-commit` repository and run: `pip install . `
 
-
-### Getting started 
+## Getting started 
 
 * Navigate to the root directory of a repository you wish to run hooks in.
-* Run the command `pre-commit install`.
-* Create a `.pre-commit-config.yaml` file. This is how the pre-commit framework installs and runs selected hooks, and must be included in any repository utilising the framework.
-    * The following content, pasted directly into your `.pre-commit-config.yaml` file, will install the two hooks from this repository.
-<pre>
+* Run the command: `pre-commit install`.
+* Create a `.pre-commit-config.yaml` file. This is how the pre-commit framework installs and runs selected hooks.  This file must be included in any repository utilising the framework.  The following content, pasted directly into your `.pre-commit-config.yaml` file, will install the two hooks from this repository.
+
+```
 repos:
 -   repo: https://github.com/hmrc/security-git-hooks
     rev: master
@@ -30,20 +30,27 @@ repos:
         exclude: ".tar$|.gz$|.jar$|.7z$|.rar$|.bz2$|.zip$|.gzip$|.war$|.ear$|.xlsx$|.xls$|
                 |.docx$|.doc$|.pptx$|.pdf$|.jpg$|.png$|.jpeg$|.tif$|.tiff$|.gif$|.bmp$|.webp$|.svg$|.ico$|.psd$|.exe$|.dll$|.dmg$|.de$|.rpm$"
 
-</pre>
+```
 
+### Quick test
+In order to quickly check if everything is working as expected, test with:
+
+* Change into your selected repository.
+* Create a dummy file to test the file type check: `touch fake.key.pem`
+* Create a dummy file to test the file content check: `echo aws_secret_access_key = 1ye+VarkHMg7o6MNjwWIqOYICe03lfA+KPPAmeaY > fake.aws.file`
+
+### Definitions
 * `repo` - Points to the repository containing the hook(s). Can be set to `local` for running/testing your own hooks, although additional information (which wouold usually be included in the `.pre-commit-hooks.yaml` is required if this is the case).
 
+* `hooks` - Declares the `id`, and optionally the local `name` of the hook. There are further options to include `language`,  `entrypoint`, and a list of any files to `exclude`. Although this information should not be included generally as it can be found in the `.pre-commit-hooks.yaml` file, the exclusions have been provided as part of the configuration file to provide additional user choice in this case. The default exclusions here are in line with the filetypes excluded by the Leak Detection Service itself, although any changes made to your exclusion list will not affect the Leak Detection Service.  
 
+See [here](https://pre-commit.com/#plugins) for more information on the `.pre-commit-config.yaml` document format.
 
-* `hooks` - Declares the `id`, and optionally the local `name` of the hook. There is the option to include the `language`, the `entrypoint`, and a list of any files to `exclude`, although this information should not be included generally as it can be found in the `.pre-commit-hooks.yaml` file. The exclusions have been provided as part of the configuration file to provide additional user choice in this case. The default exclusions here are in line with the filetypes excluded by the Leak Detection Service itself, although any changes made to your exclusion list will not affect leak detection alerting. Please note that the exclusions must be provided as [Python compliant regex](https://www.debuggex.com/cheatsheet/regex/python) (which is very similar to PCRE).
+*NOTE:* Exclusions must be provided as [Python compliant regex](https://www.debuggex.com/cheatsheet/regex/python)
 
+## Usage
 
-    See [here](https://pre-commit.com/#plugins) for more information on the `.pre-commit-config.yaml` document format.
-
-### Usage
-
-If you wish to run hooks without committing, pre-commit can be used as a general scanning tool with the `pre-commit run --all-files` or `pre-commit run <hook name>` commands, providing git is initialised and pre-commit installed in the relevant repository.
+If you wish to run hooks without committing, pre-commit can be used as a general scanning tool with the `pre-commit run --all-files` or `pre-commit run <hook name>` commands, providing Git is initialised and pre-commit installed in the relevant repository.
 
 You can forgo the pre-commit hooks entirely by use of the `--no-verify` flag, although due to the relationship between the `secrets-filename` and `secrets-filecontent` hooks and the Leak Detection Service, an LDS alert will be triggered by the commit for any files not on the exemption list contained within your `repository.yaml` file.
 
@@ -55,11 +62,10 @@ The developers of the pre-commit framework have written various hooks, which can
 
 Pre-commit hooks themselves can be written in any language, however for a list of languages currently supported by the framework, please see [here](https://pre-commit.com/#new-hooks)
 
-### Hooks in this respository
+## Hooks in this respository
 
 `secrets-filename` -  Checks against the LDS file extension ruleset as defined [here](https://github.com/hmrc/app-config-base/blob/master/leak-detection.conf#L142)
 
 `secrets-filecontent` - Checks against the LDS file content ruleset as defined [here](https://github.com/hmrc/app-config-base/blob/master/leak-detection.conf#L92)
 
 You can test the hooks by cloning this repository and running `pytest` in the root directory.
-
