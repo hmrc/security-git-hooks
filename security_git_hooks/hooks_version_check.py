@@ -51,7 +51,8 @@ def main():
         print(
             "Checking automatically for updates failed. Check manually or run 'pre-commit autoupdate' as a precaution"
         )
-    return 0
+    finally:
+        return 0
 
 
 if __name__ == "__main__":
