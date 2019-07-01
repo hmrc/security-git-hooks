@@ -10,7 +10,7 @@ def check_release_version_from_config():
     try:
         with open(".pre-commit-config.yaml", "r") as file:
             config = yaml.safe_load(file)
-            res = filter(lambda x: "mobile-token-proxy" in x["repo"], config["repos"])
+            res = filter(lambda x: "security-git-hooks" in x["repo"], config["repos"])
             return next(res)["rev"]
     except:
         raise Exception("Local checks failed.")
@@ -19,7 +19,7 @@ def check_release_version_from_config():
 def check_release_version_from_remote_repo():
     try:
         req = requests.get(
-            "https://api.github.com/repos/hmrc/mobile-token-proxy/releases/latest"
+            "https://api.github.com/repos/hmrc/security-git-hooks/releases/latest"
         )
         content = req.json()
         return content["tag_name"]
