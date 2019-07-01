@@ -17,6 +17,7 @@ setup(
         "console_scripts": [
             "security-git-hooks-filecontent = security_git_hooks.secrets_filecontent:main",
             "security-git-hooks-filename = security_git_hooks.secrets_filename:main",
+            "security-git-hooks-version-check = security_git_hooks.hooks_version_checker:main",
         ]
     },
     packages=find_packages(),
