@@ -5,15 +5,21 @@ import json
 import yaml
 import sys
 
+"""This hook checks the security-git-hooks release contained in .pre-commit-config.yaml against
+ the latest release from https://github.com/hmrc/security-git-hooks. It is an information only 
+ hook, and will always pass as to prevent the interruption of workflow, however it will produce 
+ output to advise when a new release is available"""
 
-def check_release_version_from_config():
+
+def check_release_version_from_config(pre_commit_config_yaml):
     try:
-        with open(".pre-commit-config.yaml", "r") as file:
+        with open(pre_commit_config_yaml, "r") as file:
             config = yaml.safe_load(file)
             res = filter(lambda x: "security-git-hooks" in x["repo"], config["repos"])
             return next(res)["rev"]
     except:
         raise Exception("Local checks failed.")
+        
 
 
 def check_release_version_from_remote_repo():
@@ -29,7 +35,7 @@ def check_release_version_from_remote_repo():
 
 def main():
     try:
-        config_version = check_release_version_from_config()
+        config_version = check_release_version_from_config(".pre-commit-config.yaml")
         latest_release = check_release_version_from_remote_repo()
         if config_version == latest_release:
             print("All hooks from HMRC are currently up to date")
