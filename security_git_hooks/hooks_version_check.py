@@ -19,7 +19,7 @@ def check_release_version_from_config(pre_commit_config_yaml):
             res = filter(lambda x: "security-git-hooks" in x["repo"], config["repos"])
             return next(res)["rev"]
     except:
-        raise Exception("Local checks failed.")
+        raise Exception("Local checks failed")
         
 
 
@@ -32,7 +32,7 @@ def check_release_version_from_remote_repo():
         content = req.json()
         return content["tag_name"]
     except:
-        raise Exception("Remote checks failed.")
+        raise Exception("Remote checks failed")
 
 
 def main():
@@ -49,9 +49,9 @@ def main():
                 )
             )
 
-    except Exception:
+    except Exception as e:
         print(
-            "Checking for updates failed. Run 'pre-commit autoupdate' in this directory as a precaution"
+            "Checking for updates against HMRC hooks failed ({error}). Run 'pre-commit autoupdate' in this directory as a precaution".format(error= e.message)
         )
     finally:
         return 0
