@@ -15,7 +15,6 @@ import sys
 def check_release_version_from_config(pre_commit_config_yaml):
     """checks the pre-commit-config.yaml in the current directory and returns the release tag detailed there"""
     try:
-        import os ; print(os.environ)
         with open(pre_commit_config_yaml, "r") as file:
             config = yaml.safe_load(file)
             res = filter(lambda x: "security-git-hooks" in x["repo"], config["repos"])
