@@ -51,7 +51,7 @@ def main():
     except Exception as e:
         print(
             "Checking for updates against HMRC hooks failed ({error}). Run 'pre-commit autoupdate' in this directory as a precaution".format(
-                error=e.message
+                error=e
             )
         )
     finally:
