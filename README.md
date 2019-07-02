@@ -19,7 +19,7 @@ For members of the public, installation steps of the central project can be foun
 
 * Navigate to the root directory of a repository you wish to run hooks in.
 * Run the command: `pre-commit install`.
-* If there is no `.pre-commit-config.yaml` file present, create one. This is how the pre-commit framework installs and runs selected hooks.  This file must be included in any repository utilising the framework.  The following content, pasted directly into your `.pre-commit-config.yaml` file, will install all hooks present in this repository.
+* If there is no `.pre-commit-config.yaml` file present, create one. This is how the pre-commit framework installs and runs selected hooks.  This file must be included in any repository utilising the framework.  The following content, pasted directly into your `.pre-commit-config.yaml` file, will install all hooks present in this repository. Alternatively, if you have chosen to clone this repository, you can directly copy the `.pre-commit-config.yaml` contained here into whichever directory you're running hooks in.
 
 ```
 repos:
@@ -82,7 +82,7 @@ You can update hooks to point directly at the latest tagged version of a hook by
 
 ### Installing other hooks or writing your own
 
-The developers of the pre-commit framework have written various hooks, which can be found [here](https://github.com/pre-commit/pre-commit-hooks) along with additional information about the framework. If you see a hook you would like to use which is external to the HMRC organisation, please check the license and post in the `#community-security` slack channel. Additionally, if you have written a hook and wish to include it in this repository, please submit a pull request with an update to the `README` and `.pre-commit-config.yaml` files. The decision to host hooks in our own repository was taken as a security measure, **as the hook mechanism allows for malicious code to be executed, should it be checked in to the repository which holds the hook**.
+The developers of the pre-commit framework have written various hooks, which can be found [here](https://github.com/pre-commit/pre-commit-hooks) along with additional information about the framework. If you see a hook you would like to use which is external to the HMRC organisation, please check the license and post in the `#community-security` slack channel so we can mirror it if appropriate. Additionally, if you have written a hook and wish to include it in this repository, please submit a pull request with an update to the `README` and `.pre-commit-config.yaml` files. The decision to host hooks exclusively in our own repository was taken as a security measure, **as the hook mechanism allows for any malicious code to be executed, should it be checked in to the repository which holds the hook**. This is a set recommendation to all users in the HMRC organisation.
 
 Pre-commit hooks themselves can be written in any language, however for a list of languages currently supported by the framework, please see [here](https://pre-commit.com/#new-hooks)
 
