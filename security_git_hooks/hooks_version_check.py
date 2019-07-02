@@ -20,7 +20,6 @@ def check_release_version_from_config(pre_commit_config_yaml):
             return next(res)["rev"]
     except:
         raise Exception("Local checks failed")
-        
 
 
 def check_release_version_from_remote_repo():
@@ -51,7 +50,9 @@ def main():
 
     except Exception as e:
         print(
-            "Checking for updates against HMRC hooks failed ({error}). Run 'pre-commit autoupdate' in this directory as a precaution".format(error= e.message)
+            "Checking for updates against HMRC hooks failed ({error}). Run 'pre-commit autoupdate' in this directory as a precaution".format(
+                error=e.message
+            )
         )
     finally:
         return 0
