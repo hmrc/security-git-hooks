@@ -1,34 +1,42 @@
 # security-git-hooks
 
-The purpose of these pre-commit Git hooks is to check file types and content against pre-defined fixed rules in order to identify potential sensitive information in Git commits. Managing sensitive content before it is committed to GitHub helps in maintaining our overall security posture.  As a secondary bonus, it also helps prevent the Leak Detection Service (LDS) triggering an alert and reduces the potential for secrets requiring manual removal from the Git history or keys require cycling.  
+The purpose of these pre-commit Git hooks is to check file types and content against pre-defined rules in order to identify potentially sensitive information prior to commit. Managing sensitive content before it is committed to GitHub helps maintain our overall security posture, and also helps prevent the Leak Detection Service (LDS) triggering an alert, thus reducing the potential for secrets requiring manual removal from Git histories and for keys which would then require cycling.  
 
-*NOTE:* These hooks do not check for the presence of a `repository.yaml` file and have no relationship with the LDS exclusions defined there.
+*NOTE:* These hooks do not check for the presence of a `repository.yaml` file and have no relationship with the LDS exemptions defined there. Our pre-commit hooks use inline exclusions. Simply add a comment on the line above the content containing the string `pre-commit ignore`, and the hook will skip the line.
 
 ## Installation
 
-We have opted to fork the [pre-commit](https://pre-commit.com/) project into HMRCs GitHub account so that we have control over what is allowed to be commited.  
-Installation steps as follow:
+We have opted to fork the [pre-commit](https://pre-commit.com/) project into HMRC's GitHub account so that we have control over what is commited.  
+Installation steps for HMRC users are as follows:
 
 * Clone [pre-commit](https://github.com/hmrc/pre-commit) with: `git clone https://github.com/hmrc/pre-commit`
 * Navigate to the root of the `pre-commit` repository and run: `pip install . `
+
+For members of the public, installation steps of the central project can be found [here](https://pre-commit.com/#install).
+
 
 ## Getting started 
 
 * Navigate to the root directory of a repository you wish to run hooks in.
 * Run the command: `pre-commit install`.
-* Create a `.pre-commit-config.yaml` file. This is how the pre-commit framework installs and runs selected hooks.  This file must be included in any repository utilising the framework.  The following content, pasted directly into your `.pre-commit-config.yaml` file, will install the two hooks from this repository.
+* If there is no `.pre-commit-config.yaml` file present, create one. This is how the pre-commit framework installs and runs selected hooks.  This file must be included in any repository utilising the framework.  The following content, pasted directly into your `.pre-commit-config.yaml` file, will install all hooks present in this repository.
 
 ```
 repos:
 -   repo: https://github.com/hmrc/security-git-hooks
-    rev: master
+    rev: [update with release tag]
     hooks:
     -   id: secrets_filecontent
+        name: Checking staged files for sensitive content
         exclude: ".tar$|.gz$|.jar$|.7z$|.rar$|.bz2$|.zip$|.gzip$|.war$|.ear$|.xlsx$|.xls$|
                 |.docx$|.doc$|.pptx$|.pdf$|.jpg$|.png$|.jpeg$|.tif$|.tiff$|.gif$|.bmp$|.webp$|.svg$|.ico$|.psd$|.exe$|.dll$|.dmg$|.de$|.rpm$"
     -   id: secrets_filename
+        name: Checking staged files for sensitive file types
         exclude: ".tar$|.gz$|.jar$|.7z$|.rar$|.bz2$|.zip$|.gzip$|.war$|.ear$|.xlsx$|.xls$|
                 |.docx$|.doc$|.pptx$|.pdf$|.jpg$|.png$|.jpeg$|.tif$|.tiff$|.gif$|.bmp$|.webp$|.svg$|.ico$|.psd$|.exe$|.dll$|.dmg$|.de$|.rpm$"
+    -   id: hooks_version_check
+        name: Checking local hooks against latest release
+        verbose: true
 
 ```
 
@@ -70,11 +78,11 @@ If you wish to run hooks without committing, pre-commit can be used as a general
 
 You can forgo the pre-commit hooks entirely by use of the `--no-verify` flag, although due to the relationship between the `secrets-filename` and `secrets-filecontent` hooks and the Leak Detection Service, an LDS alert will be triggered by the commit for any files not on the exemption list contained within your `repository.yaml` file.
 
-You can automatically update hooks to point directly at the latest tagged version of a hook by using `pre-commit autoupdate`, or alternatively, `pre-commit autoupdate --bleeding-edge` will point at the latest version of master.
+You can update hooks to point directly at the latest tagged version of a hook by using `pre-commit autoupdate`, or alternatively, `pre-commit autoupdate --bleeding-edge` will point at the latest version of master.
 
 ### Installing other hooks or writing your own
 
-The developers of the pre-commit framework have written various hooks, which can be found [here](https://github.com/pre-commit/pre-commit-hooks) along with additional information about the framework. We have included some popular hooks in this repository, however if you see a hook you would like to use which is external to the HMRC organisation, please check the license and post in the `#community-security` slack channel. Additionally, if you have written a hook and wish to include it in this repository, please submit a pull request with an update to the `README` and `.pre-commit-config.yaml` files. The decision to host hooks in our own repository was taken as a security measure, as the hook update mechanism potentially allows for malicious code to be executed, should it be checked in to the repository holding the hook.
+The developers of the pre-commit framework have written various hooks, which can be found [here](https://github.com/pre-commit/pre-commit-hooks) along with additional information about the framework. If you see a hook you would like to use which is external to the HMRC organisation, please check the license and post in the `#community-security` slack channel. Additionally, if you have written a hook and wish to include it in this repository, please submit a pull request with an update to the `README` and `.pre-commit-config.yaml` files. The decision to host hooks in our own repository was taken as a security measure, **as the hook mechanism allows for malicious code to be executed, should it be checked in to the repository which holds the hook**.
 
 Pre-commit hooks themselves can be written in any language, however for a list of languages currently supported by the framework, please see [here](https://pre-commit.com/#new-hooks)
 
@@ -83,5 +91,7 @@ Pre-commit hooks themselves can be written in any language, however for a list o
 `secrets-filename` -  Checks against the LDS file extension ruleset as defined [here](https://github.com/hmrc/app-config-base/blob/master/leak-detection.conf#L142)
 
 `secrets-filecontent` - Checks against the LDS file content ruleset as defined [here](https://github.com/hmrc/app-config-base/blob/master/leak-detection.conf#L92)
+
+`hooks-version-check` - Checks the tag from your `.pre-commit-config.yaml` file against the latest tagged release in the repository. This is an information only hook, and will provide output but always pass.
 
 You can test the hooks by cloning this repository and running `pytest` in the root directory.
