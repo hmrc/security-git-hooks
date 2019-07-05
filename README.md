@@ -2,7 +2,7 @@
 
 The purpose of these pre-commit Git hooks is to check file types and content against pre-defined rules in order to identify potentially sensitive information prior to commit. Managing sensitive content before it is committed to GitHub helps maintain our overall security posture, and also helps prevent the Leak Detection Service (LDS) triggering an alert, thus reducing the potential for secrets requiring manual removal from Git histories and for keys which would then require cycling.  
 
-*NOTE:* These hooks do not check for the presence of a `repository.yaml` file and have no relationship with the LDS exemptions defined there. Our pre-commit hooks use inline exclusions. Simply add a comment on the line above the content containing the string `pre-commit ignore`, and the hook will skip the line.
+*NOTE:* These hooks do not check for the presence of a `repository.yaml` file and have no relationship with the LDS exemptions defined there. Our pre-commit hooks use inline exclusions. Simply add a comment on the line above the content containing the string `LDS ignore`, and the hook will skip the line. **NB** - This functionality will soon be extended to the LDS itself - see [this ticket](https://jira.tools.tax.service.gov.uk/browse/BDOG-192) for details, however please be mindful that your `repository.yaml` exclusions will need to be maintained for now.
 
 ## Installation
 
