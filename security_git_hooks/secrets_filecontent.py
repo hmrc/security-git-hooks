@@ -3,8 +3,8 @@
 import argparse
 import re
 import yaml
-#from . import conf
-import conf
+from . import conf
+#import conf
 
 RULES = {}
 
