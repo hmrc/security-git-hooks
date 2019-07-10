@@ -30,7 +30,7 @@ def main(argv=None):
                     flag = False
                     continue
                 for regex, rule in RULES.items():
-                    if re.findall(regex, line):
+                    if re.search(regex, line):
                         print(
                             "Potentially sensitive string matching rule: {rule} found at line {line_number} of {file}".format(
                                 rule=rule, line_number=i + 1, file=filename
