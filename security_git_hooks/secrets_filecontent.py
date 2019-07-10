@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
+import time
 
+start = time.time()
 import argparse
 import re
 import yaml
-from . import conf
-#import conf
+#from . import conf
+import conf
 
 RULES = {}
 
@@ -38,6 +40,8 @@ def main(argv=None):
                             )
                         )
                 exit_code = 1
+    end = time.time()
+    print(end - start)
     return exit_code
 
 if __name__ == "__main__":
