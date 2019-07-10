@@ -3,11 +3,8 @@
 import argparse
 import re
 import yaml
-#from . import conf
-import conf
-import time
-
-start = time.time()
+from . import conf
+#import conf
 
 RULES = {}
 
@@ -32,21 +29,16 @@ def main(argv=None):
                 if flag:
                     flag = False
                     continue
-                for x, y in RULES.items():
-                    if re.search(x,line):
+                for regex, rule in RULES.items():
+                    if re.findall(regex, line):
                         print(
                             "Potentially sensitive string matching rule: {rule} found at line {line_number} of {file}".format(
-                                rule=y, line_number=i + 1, file=filename
+                                rule=rule, line_number=i + 1, file=filename
                             
                             )
                         )
                 exit_code = 1
-    end = time.time()   
-    print(end - start)
     return exit_code
-
 
 if __name__ == "__main__":
     exit(main())
-
-    
