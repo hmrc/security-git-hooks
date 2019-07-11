@@ -5,14 +5,16 @@ start = time.time()
 import argparse
 import re
 import yaml
-#from . import conf
-import conf
+from . import conf
+#import conf
 
 RULES = {}
 
 for key, value in yaml.safe_load(conf.CONF_YAML)["FILE_CONTENT_REGEXES"].items():
     RULES[value] = key
 
+def detect_secret_in_line():
+    pass
 
 def main(argv=None):
     conf.validate_expressions("FILE_CONTENT_REGEXES")
