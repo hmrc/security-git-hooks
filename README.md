@@ -24,7 +24,7 @@ For members of the public, installation steps of the central project can be foun
 ```
 repos:
 -   repo: https://github.com/hmrc/security-git-hooks
-    rev: [update with release tag]
+    rev: master
     hooks:
     -   id: secrets_filecontent
         name: Checking staged files for sensitive content
