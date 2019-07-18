@@ -15,7 +15,7 @@ def detect_match_against_filename(files_to_check):
     """checks argument against compiled regexes"""
     for rule_name, rule in yaml.safe_load(conf.CONF_YAML)["FILE_NAME_REGEXES"].items():
         if re.search(rule["pattern"], files_to_check):
-            return regex
+            return rule_name
 
 
 def main(argv=None):
