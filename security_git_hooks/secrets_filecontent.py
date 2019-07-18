@@ -5,17 +5,32 @@ import yaml
 from . import conf
 #import conf
 
-YAMLFILE = yaml.safe_load(conf.CONF_YAML)["FILE_CONTENT_REGEXES"]
+YAMLFILE = yaml.safe_load(conf.CONF_YAML)["FILE_CONTENT_RULES"]
 
-def detect_secret_in_line(line_to_check):
+
+def detect_secret_in_line(line_to_check, filename):
     """compiles regex and checks against line."""
-    for rule, regex in YAMLFILE.items():
-        if re.search(regex, line_to_check):
-            return rule
+    rules = YAMLFILE
+
+    rules_to_check = {
+        rule_name: rule
+        for rule_name, rule in rules.items()
+        if not is_rule_excluded(filename, rule)
+    }
+
+    for rule_name, rule in rules_to_check.items():
+        if re.search(rule["pattern"], line_to_check):
+            return rule_name
+
+
+def is_rule_excluded(filename, rule):
+    for exclusion in rule["exclusions"]:
+        if re.search(exclusion, filename):
+            return True
 
 
 def main(argv=None):
-    conf.validate_expressions("FILE_CONTENT_REGEXES")
+    conf.validate_expressions("FILE_CONTENT_RULES")
     parser = argparse.ArgumentParser()
     parser.add_argument("filenames", nargs="*", help="Files to check")
     args = parser.parse_args(argv)
@@ -31,7 +46,7 @@ def main(argv=None):
                 if flag:
                     flag = False
                     continue
-                rule = detect_secret_in_line(line)
+                rule = detect_secret_in_line(line, filename)
                 if rule:
                     print(
                         "Potentially sensitive string matching rule: {rule} found on line {line_number} of {file}".format(
@@ -44,5 +59,3 @@ def main(argv=None):
 
 if __name__ == "__main__":
     exit(main())
-
-    

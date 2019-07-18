@@ -1,21 +1,20 @@
 repos:
 -   repo: https://github.com/hmrc/security-git-hooks
-    rev: master
+    rev: v1.0.0-beta7
     hooks:
-    -   id: secrets_filecontent
-        name: Checking staged files for sensitive content
-        files: ''
-        language: python
-        pass_filenames: true
-        exclude: ".tar$|.gz$|.jar$|.7z$|.rar$|.bz2$|.zip$|.gzip$|.war$|.ear$|.xlsx$|.xls$|
-                |.docx$|.doc$|.pptx$|.pdf$|.jpg$|.png$|.jpeg$|.tif$|.tiff$|.gif$|.bmp$|.webp$|.svg$|.ico$|.psd$|.exe$|.dll$|.dmg$|.de$|.rpm$"
     -   id: secrets_filename
-        name: Checking staged files for sensitive file types
+        files: ''
+        language: python
+        pass_filenames: true
+        exclude: ".tar$|.scala$|.gz$|.jar$|.7z$|.rar$|.bz2$|.zip$|.gzip$|.war$|.ear$|.xlsx$|.xls$|
+                |.docx$|.doc$|.pptx$|.pdf$|.jpg$|.png$|.jpeg$|.tif$|.tiff$|.gif$|.bmp$|.webp$|
+                |.svg$|.ico$|.psd$|.exe$|.dll$|.dmg$|.de$|.rpm$|.*phantomjs.*|.*chromedriver.*|/.*BrowserStackLocal.*"
+    -   id: secrets_filecontent
         files: ''
         language: python
         pass_filenames: true
         exclude: ".tar$|.gz$|.jar$|.7z$|.rar$|.bz2$|.zip$|.gzip$|.war$|.ear$|.xlsx$|.xls$|
-                |.docx$|.doc$|.pptx$|.pdf$|.jpg$|.png$|.jpeg$|.tif$|.tiff$|.gif$|.bmp$|.webp$|.svg$|.ico$|.psd$|.exe$|.dll$|.dmg$|.de$|.rpm$"
+                |.docx$|.doc$|.pptx$|.pdf$|.jpg$|.png$|.jpeg$|.tif$|.tiff$|.gif$|.bmp$|.webp$|.svg$|.ico$|.psd$|.exe$|.dll$|.dmg$|.de$|.rpm$|kitchen.yml"
     -   id: hooks_version_check
-        name: Checking updates
+        name: Checking local hooks against latest release
         verbose: true

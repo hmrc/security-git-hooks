@@ -5,6 +5,7 @@ import sys
 import re
 import yaml
 from . import conf
+#import conf 
 
 """Parse the files in a github commit for potentially sensitive filenames, per rules 
 defined at https://github.com/hmrc/app-config-base/blob/master/leak-detection.conf"""
@@ -12,8 +13,8 @@ defined at https://github.com/hmrc/app-config-base/blob/master/leak-detection.co
 
 def detect_match_against_filename(files_to_check):
     """checks argument against compiled regexes"""
-    for rule, regex in yaml.safe_load(conf.CONF_YAML)["FILE_NAME_REGEXES"].items():
-        if re.search(regex, files_to_check):
+    for rule_name, rule in yaml.safe_load(conf.CONF_YAML)["FILE_NAME_REGEXES"].items():
+        if re.search(rule["pattern"], files_to_check):
             return regex
 
 
