@@ -6,7 +6,7 @@ repos:
         files: ''
         language: python
         pass_filenames: true
-        exclude: ".tar$|.scala$|.gz$|.jar$|.7z$|.rar$|.bz2$|.zip$|.gzip$|.war$|.ear$|.xlsx$|.xls$|
+        exclude: ".tar$|.gz$|.jar$|.7z$|.rar$|.bz2$|.zip$|.gzip$|.war$|.ear$|.xlsx$|.xls$|
                 |.docx$|.doc$|.pptx$|.pdf$|.jpg$|.png$|.jpeg$|.tif$|.tiff$|.gif$|.bmp$|.webp$|
                 |.svg$|.ico$|.psd$|.exe$|.dll$|.dmg$|.de$|.rpm$|.*phantomjs.*|.*chromedriver.*|/.*BrowserStackLocal.*"
     -   id: secrets_filecontent
