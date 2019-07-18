@@ -4,8 +4,8 @@ import argparse
 import sys
 import re
 import yaml
-#from . import conf
-import conf 
+from . import conf
+#import conf 
 
 """Parse the files in a github commit for potentially sensitive filenames, per rules 
 defined at https://github.com/hmrc/app-config-base/blob/master/leak-detection.conf"""
