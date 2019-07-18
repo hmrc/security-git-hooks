@@ -39,7 +39,7 @@ FILE_CONTENT_RULES:
         exclusions: []
     cert_1: 
         pattern: -----(BEGIN|END).*?PRIVATE.*?-----
-        exclusions: [kitchen.yml$]
+        exclusions: [kitchen.yaml$, kitchen.yml$]
     application_secret: 
         pattern: application\.secret\s*(=|:|->)\s*(?!(\s*ENC\[))
         exclusions: [.scala$, /conf/application.conf$]
