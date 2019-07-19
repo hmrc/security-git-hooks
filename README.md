@@ -6,13 +6,7 @@ The purpose of these pre-commit Git hooks is to check file types and content aga
 
 ## Installation
 
-We have opted to fork the [pre-commit](https://pre-commit.com/) project into HMRC's GitHub account so that we have control over what is commited.  
-Installation steps for HMRC users are as follows:
-
-* Clone [pre-commit](https://github.com/hmrc/pre-commit) with: `git clone https://github.com/hmrc/pre-commit`
-* Navigate to the root of the `pre-commit` repository and run: `pip install . `
-
-For members of the public, installation steps of the central project can be found [here](https://pre-commit.com/#install).
+`pip3 install pre-commit`
 
 
 ## Getting started 
