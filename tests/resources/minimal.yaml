@@ -1,0 +1,5 @@
+repos:
+-   repo: https://github.com/hmrc/security-git-hooks
+    rev: v1.0
+    hooks:
+    -   id: secrets_filecontent

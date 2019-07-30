@@ -2,8 +2,10 @@
 import argparse
 import re
 import yaml
+
 from . import conf
-#import conf
+
+# import conf
 
 YAMLFILE = yaml.safe_load(conf.CONF_YAML)["FILE_CONTENT_RULES"]
 

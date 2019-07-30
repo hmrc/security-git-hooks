@@ -1,11 +1,15 @@
 import pytest
-import re
+import os
 
 from security_git_hooks import secrets_filecontent
 
-"""All comments at beginning of test sets correspond to id of leak detection rules per
-https://github.com/hmrc/app-config-base/blob/master/leak-detection.conf"""
+"""All comments at beginning of test sets 
+correspond to id of leak detection rules per 
+ https://github.com/hmrc/app-config-base/blob/master/leak-detection.conf"""
 
+my_path = os.path.abspath(os.path.dirname(__file__))
+
+minimal = os.path.join(my_path, "resources/minimal.yaml")
 
 # aws_2
 
@@ -226,3 +230,7 @@ def test_cookie_deviceId_secret(line, file, expected):
 )
 def test_sso_encrpytion_key(line, file, expected):
     assert secrets_filecontent.detect_secret_in_line(line, file) == expected
+
+
+def test_main():
+    assert secrets_filecontent.main([minimal]) == 0

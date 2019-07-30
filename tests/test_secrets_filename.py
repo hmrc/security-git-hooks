@@ -1,6 +1,5 @@
 import pytest
 from security_git_hooks import secrets_filename
-import re
 
 """All comments at beginning of test sets correspond to id of leak detection rules per
 https://github.com/hmrc/app-config-base/blob/master/leak-detection.conf"""
@@ -219,3 +218,11 @@ def test_credential_3_keychain__REVIEW(test_input, expected):
 )
 def test_credential_4_keystore_keyring(test_input, expected):
     assert secrets_filename.detect_match_against_filename(test_input) == expected
+
+
+def test_main_pos():
+    assert secrets_filename.main(["lol.txt"]) == 0
+
+
+def test_main_neg():
+    assert secrets_filename.main(["lol.pem"]) != 0
