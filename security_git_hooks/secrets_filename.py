@@ -6,7 +6,7 @@ import yaml
 
 from . import conf
 
-#import conf
+# import conf
 
 """Parse the files in a github commit for potentially sensitive filenames, per rules 
 defined at https://github.com/hmrc/app-config-base/blob/master/leak-detection.conf"""

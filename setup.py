@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 from codecs import open
 import os
-
+import version_incrementor
 
 def read(filename):
     return open(os.path.join(os.path.dirname(__file__), filename)).read()
@@ -10,6 +10,8 @@ def read(filename):
 setup(
     name="security-git-hooks",
     author="HRMC Platform Security",
+    author_email="platsec.monitor@digital.hmrc.gov.uk",
+    version=version_incrementor.prepare_release(major=0),
     description="Detect secrets prior to commit",
     url="https://github.com/hmrc/security-git-hooks/",
     long_description=read("README.md"),
