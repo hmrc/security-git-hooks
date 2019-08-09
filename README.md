@@ -40,7 +40,7 @@ In order to quickly check if everything is working as expected, test with:
 * Change into your selected repository.
 * Create a dummy file to test the file type check: `touch fake.key.pem`
 * Create a dummy file to test the file content check: `echo aws_secret_access_key = 1ye+VarkHMg7o6MNjwWIqOYICe03lfA+KPPAmeaY > fake.aws.file`
-* Test with: `git add -A && git commit -m 'testing pre-commits'
+* Test with: `git add -A && git commit -m 'testing pre-commits'`
 
 You should see the following output:
 ```
@@ -76,7 +76,7 @@ You can update hooks to point directly at the latest tagged version of a hook by
 
 ### Installing other hooks or writing your own
 
-The developers of the pre-commit framework have written various hooks, which can be found [here](https://github.com/pre-commit/pre-commit-hooks) along with additional information about the framework. If you see a hook you would like to use which is external to the HMRC organisation, please check the license and post in the `#community-security` slack channel so we can mirror it if appropriate. Additionally, if you have written a hook and wish to include it in this repository, please submit a pull request with an update to the `README` and `.pre-commit-config.yaml` files. The decision to host hooks exclusively in our own repository was taken as a security measure, **as the hook mechanism allows for any malicious code to be executed, should it be checked in to the repository which holds the hook**. This is a set recommendation to all users in the HMRC organisation.
+The developers of the pre-commit framework have written various hooks, which can be found [here](https://github.com/hmrc/pre-commit-hooks) along with additional information about the framework. If you see a hook you would like to use which is external to the HMRC organisation, please check the license and post in the `#community-security` slack channel so we can mirror it if appropriate. Additionally, if you have written a hook and wish to include it in this repository, please submit a pull request with an update to the `README` and `.pre-commit-config.yaml` files. The decision to host hooks exclusively in our own repository was taken as a security measure, **as the hook mechanism allows for any malicious code to be executed, should it be checked in to the repository which holds the hook**. This is a set recommendation to all users in the HMRC organisation.
 
 Pre-commit hooks themselves can be written in any language, however for a list of languages currently supported by the framework, please see [here](https://pre-commit.com/#new-hooks)
 
@@ -88,4 +88,4 @@ Pre-commit hooks themselves can be written in any language, however for a list o
 
 `hooks-version-check` - Checks the tag from your `.pre-commit-config.yaml` file against the latest tagged release in the repository. This is an information only hook, and will provide output but always pass.
 
-You can test the hooks by cloning this repository and running `pytest` in the root directory.
+You can test the hooks by cloning this repository and running `tox` in the root directory.
