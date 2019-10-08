@@ -10,8 +10,13 @@
     language: python
     entry: security-git-hooks-filename
     
--   id: hooks_version_check
+-   id: repository_check
     name: Check local hooks release against latest
     description: 'Check local hooks release against latest'
     language: python
+    entry: security-git-hooks-repository-check
+
+-   id: hooks_version_check
+    name: Check repository.yaml
+    description: 'Check repository.yaml'
     entry: security-git-hooks-version-check

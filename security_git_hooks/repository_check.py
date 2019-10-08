@@ -11,3 +11,4 @@ def repository_check():
 
 if __name__ == __main__:
     exit(repository_check())
+    exit(repository_check())
