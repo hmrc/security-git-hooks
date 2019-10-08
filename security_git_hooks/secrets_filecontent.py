@@ -3,16 +3,31 @@ import argparse
 import re
 import yaml
 
-from . import conf
+from .. import conf
 
 # import conf
 
-YAMLFILE = yaml.safe_load(conf.CONF_YAML)["FILE_CONTENT_RULES"]
+PRIVATE_RULES = yaml.safe_load(conf.CONF_YAML)["PRIVATE_RULES"]
+
+PUBLIC_RULES = yaml.safe_load(conf.CONF_YAML)["PUBLIC_RULES"]
+
+def repository_yaml_check():
+    for filename in args.filenames:
+        if filename == "repository.yaml":
+            with open(filename, "r") as repo:
+                for line in repo:
+                    if re.search(CONF.REPOSITORY_YAML_CONTENT[public]):
+                        return PRIVATE_RULES, PUBLIC_RULES
+                    elif re.search(CONF.REPOSITORY_YAML_CONTENT[private]):
+                        return PRIVATE_RULES
+                    else:
+                        print("No repository,yaml file found, checking against all rules")
+                        return PRIVATE_RULES, PUBLIC_RULES
 
 
 def detect_secret_in_line(line_to_check, filename):
     """compiles regex and checks against line."""
-    rules = YAMLFILE
+    rules = repository_yaml_check()
 
     rules_to_check = {
         rule_name: rule

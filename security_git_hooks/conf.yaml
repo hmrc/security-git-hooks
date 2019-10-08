@@ -33,7 +33,7 @@ FILE_NAME_REGEXES:
         pattern: ^key(store|ring)$
 
 
-FILE_CONTENT_RULES:
+PRIVATE_RULES:
     aws_2: 
         pattern: (?:aws).{0,100}?(:|=|=>|->)\s*\"?(?<![A-Za-z0-9\/+=])[A-Za-z0-9\/+=]{40}(?![A-Za-z0-9\/+=])\"?
         exclusions: []
@@ -52,3 +52,12 @@ FILE_CONTENT_RULES:
     sso_encryption_key: 
         pattern: sso\.encryption\.key\s*(=|:|->)\s*(?!(\s*ENC\[))
         exclusions: [.scala$, /conf/application.conf$]
+
+PUBLIC_RULES:
+    ip_adresses:
+        pattern: \b10\.(?:19|33|39)\.(?:6|1)(?:82|76|[3-4]|[8-9])[6-7]*\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b
+        exclusions: []
+
+REPOSITORY_YAML_CONTENT:
+    public: public_0C3F0CE3E6E6448FAD341E7BFA50FCD333E06A20CFF05FCACE61154DDBBADF71
+    private: "repoVisibility: private_12E5349CFB8BBA30AF464C24760B70343C0EAE9E9BD99156345DD0852C2E0F6F"
