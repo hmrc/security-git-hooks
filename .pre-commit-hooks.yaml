@@ -19,4 +19,5 @@
 -   id: hooks_version_check
     name: Check repository.yaml
     description: 'Check repository.yaml'
+    language: python
     entry: security-git-hooks-version-check
