@@ -3,7 +3,7 @@ import argparse
 import re
 import yaml
 
-from .. import conf
+from . import conf
 
 # import conf
 
