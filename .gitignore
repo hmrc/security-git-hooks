@@ -1,3 +1,7 @@
+/.coverage
+/.tox
+/htmlcov
+*.egg-info/
 logs
 project/project
 project/target
