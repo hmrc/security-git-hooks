@@ -12,25 +12,32 @@ PRIVATE_RULES = yaml.safe_load(conf.CONF_YAML)["PRIVATE_RULES"]
 PUBLIC_RULES = yaml.safe_load(conf.CONF_YAML)["PUBLIC_RULES"]
 
 
-def repository_yaml_check():
-    for filename in args.filenames:
-        if filename == "repository.yaml":
-            with open(filename, "r") as repo:
-                for line in repo:
-                    if re.search(CONF.REPOSITORY_YAML_CONTENT[public]):
-                        return PRIVATE_RULES, PUBLIC_RULES
-                    elif re.search(CONF.REPOSITORY_YAML_CONTENT[private]):
-                        return PRIVATE_RULES
-                    else:
-                        print(
-                            "No repository,yaml file found, checking against all rules"
-                        )
-                        return PRIVATE_RULES, PUBLIC_RULES
+def repository_yaml_check(repository_yaml):
+    """Apply appropriate ruleset per repoVisibility in repository.yaml file"""
+    """
+    - load repository.yaml (open, read, parse)
+    - access value of repoVisibility
+    - return rulesets according to value
+
+    """
+
+    with open(repository_yaml, "r") as file:
+        yamlfile = yaml.safe_load(file)
+        if yamlfile["repoVisibility"] == "public_0C3F0CE3E6E6448FAD341E7BFA50FCD333E06A20CFF05FCACE61154DDBBADF71":
+            return PUBLIC_RULES
+        elif yamlfile["repoVisibility"] == "private_12E5349CFB8BBA30AF464C24760B70343C0EAE9E9BD99156345DD0852C2E0F6F":
+            return PRIVATE_RULES
+        else:
+            print("no repository.yaml data found, searching against all rules")
+            return PUBLIC_RULES
+
+
+repository_yaml_check("repository.yaml")
 
 
 def detect_secret_in_line(line_to_check, filename):
     """compiles regex and checks against line."""
-    rules = repository_yaml_check()
+    rules = repository_yaml_check("repository.yaml")
 
     rules_to_check = {
         rule_name: rule
@@ -50,7 +57,7 @@ def is_rule_excluded(filename, rule):
 
 
 def main(argv=None):
-    conf.validate_expressions("FILE_CONTENT_RULES")
+    conf.validate_expressions("PRIVATE_RULES")
     parser = argparse.ArgumentParser()
     parser.add_argument("filenames", nargs="*", help="Files to check")
     args = parser.parse_args(argv)
