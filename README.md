@@ -18,7 +18,7 @@ The purpose of these pre-commit Git hooks is to check file types and content aga
 ```
 repos:
 -   repo: https://github.com/hmrc/security-git-hooks
-    rev: master
+    rev: v1.0.0-beta9
     hooks:
     -   id: secrets_filecontent
         name: Checking staged files for sensitive content
