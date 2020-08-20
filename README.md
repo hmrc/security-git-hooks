@@ -72,7 +72,7 @@ If you wish to run hooks without committing, pre-commit can be used as a general
 
 You can forgo the pre-commit hooks entirely by use of the `--no-verify` flag, although due to the relationship between the `secrets-filename` and `secrets-filecontent` hooks and the Leak Detection Service, an LDS alert will be triggered by the commit for any files not on the exemption list contained within your `repository.yaml` file.
 
-You can update hooks to point directly at the latest tagged version of a hook by using `pre-commit autoupdate`, or alternatively, `pre-commit autoupdate --bleeding-edge` will point at the latest version of master.
+You can update hooks to point directly at the latest tagged version of a hook by using `pre-commit autoupdate`, or alternatively, `pre-commit autoupdate --bleeding-edge` will point at the latest version of main.
 
 ### Installing other hooks or writing your own
 
@@ -82,9 +82,9 @@ Pre-commit hooks themselves can be written in any language, however for a list o
 
 ## Hooks in this respository
 
-`secrets-filename` -  Checks against the LDS file extension ruleset as defined [here](https://github.com/hmrc/app-config-base/blob/master/leak-detection.conf#L142)
+`secrets-filename` -  Checks against the LDS file extension ruleset as defined [here](https://github.com/hmrc/app-config-base/blob/main/leak-detection.conf#L142)
 
-`secrets-filecontent` - Checks against the LDS file content ruleset as defined [here](https://github.com/hmrc/app-config-base/blob/master/leak-detection.conf#L92)
+`secrets-filecontent` - Checks against the LDS file content ruleset as defined [here](https://github.com/hmrc/app-config-base/blob/main/leak-detection.conf#L92)
 
 `hooks-version-check` - Checks the tag from your `.pre-commit-config.yaml` file against the latest tagged release in the repository. This is an information only hook, and will provide output but always pass.
 

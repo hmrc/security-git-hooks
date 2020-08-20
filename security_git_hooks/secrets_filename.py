@@ -9,7 +9,7 @@ from . import conf
 # import conf
 
 """Parse the files in a github commit for potentially sensitive filenames, per rules 
-defined at https://github.com/hmrc/app-config-base/blob/master/leak-detection.conf"""
+defined at https://github.com/hmrc/app-config-base/blob/main/leak-detection.conf"""
 
 patterns = yaml.safe_load(conf.CONF_YAML)["FILE_NAME_REGEXES"]
 
