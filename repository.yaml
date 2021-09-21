@@ -77,3 +77,9 @@ leakDetectionExemptions:
       - '/secrets_filename.py'
       - '/conf.yaml'
       - '/README.md'
+
+ - ruleId: 'aws_secret_access_key'
+   filePaths:
+      - '/tests/test_secrets_filecontent.py'
+      - '/README.md'
+
