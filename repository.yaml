@@ -82,4 +82,3 @@ leakDetectionExemptions:
    filePaths:
       - '/tests/test_secrets_filecontent.py'
       - '/README.md'
-
