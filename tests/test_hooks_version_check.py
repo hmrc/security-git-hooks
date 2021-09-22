@@ -3,7 +3,7 @@ import os
 import json
 
 # import requests_mock
-# import responses
+import responses
 
 from security_git_hooks import hooks_version_check
 

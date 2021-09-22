@@ -2,7 +2,7 @@ import pytest
 from security_git_hooks import secrets_filename
 
 """All comments at beginning of test sets correspond to id of leak detection rules per
-https://github.com/hmrc/app-config-base/blob/master/leak-detection.conf"""
+https://github.com/hmrc/app-config-base/blob/HEAD/leak-detection.conf"""
 
 
 # filename_private_key_1
@@ -93,7 +93,7 @@ def test_private_key_9_ed25519(test_input, expected):
     "test_input,expected",
     [("fake_ecdsa", r"_ecdsa$"), ("_ecdsa.txt", None), ("fake_ecdsa.pub", None)],
 )
-def test_private_key_9_ed25519(test_input, expected):
+def test_private_key_10_ed25519(test_input, expected):
     assert secrets_filename.detect_match_against_filename(test_input) == expected
 
 
