@@ -23,7 +23,7 @@ def detect_match_against_filename(files_to_check):
 
 def main(argv=None):
     """Parses filenames and provides outut.
-    Note that if manually passed a directory as argument, checks are not recursive as Git 
+    Note that if manually passed a directory as argument, checks are not recursive as Git
     adds files to a commit individually."""
     conf.validate_expressions("FILE_NAME_REGEXES")
     parser = argparse.ArgumentParser()
