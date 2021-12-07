@@ -1,6 +1,6 @@
 repoVisibility: public_0C3F0CE3E6E6448FAD341E7BFA50FCD333E06A20CFF05FCACE61154DDBBADF71
 leakDetectionExemptions:
- - ruleId: 'aws_2'
+ - ruleId: 'aws_secret_access_key'
    filePaths:
       - '/test_secrets_filecontent.py'
       - '/test_secrets_filename.py'
