@@ -35,7 +35,7 @@ minimal = os.path.join(my_path, "resources/minimal.yaml")
         (
             "aws_secret_access_key=H5xnFhnR3H/o6nrcfoMLR9VfOlfOY17pa/+PchnA",
             "afile.py",
-            None,
+            "aws_secret_access_key",
         ),
         ("H5xnFhnR3H/o6nrcfoMLR9VfOlfOY17pa/+PchnA", "afile.py", None),
         (
