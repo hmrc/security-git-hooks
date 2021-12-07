@@ -53,7 +53,7 @@ fake.key.pem may contain sensitive information due to the file type
 Check filenames for potential secrets....................................Failed
 hookid: secrets_filename
 
-Potentially sensitive string matching rule: aws_2 found on line 1 of fake.aws.file
+Potentially sensitive string matching rule: aws_secret_access_key found on line 1 of fake.aws.file
 
 ```
 
