@@ -1,4 +1,3 @@
-import os
 import pkg_resources
 import yaml
 import re

@@ -8,7 +8,7 @@ from . import conf
 
 # import conf
 
-"""Parse the files in a github commit for potentially sensitive filenames, per rules 
+"""Parse the files in a github commit for potentially sensitive filenames, per rules
 defined at https://github.com/hmrc/app-config-base/blob/master/leak-detection.conf"""
 
 patterns = yaml.safe_load(conf.CONF_YAML)["FILE_NAME_REGEXES"]
@@ -16,14 +16,14 @@ patterns = yaml.safe_load(conf.CONF_YAML)["FILE_NAME_REGEXES"]
 
 def detect_match_against_filename(files_to_check):
     """checks argument against compiled regexes"""
-    for rule_name, rule in patterns.items():
+    for _, rule in patterns.items():
         if re.search(rule["pattern"], files_to_check):
             return rule["pattern"]
 
 
 def main(argv=None):
     """Parses filenames and provides outut.
-    Note that if manually passed a directory as argument, checks are not recursive as Git 
+    Note that if manually passed a directory as argument, checks are not recursive as Git
     adds files to a commit individually."""
     conf.validate_expressions("FILE_NAME_REGEXES")
     parser = argparse.ArgumentParser()

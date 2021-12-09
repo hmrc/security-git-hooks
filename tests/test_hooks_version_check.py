@@ -18,7 +18,7 @@ outororder = os.path.join(my_path, "resources/outoforder.yaml")
 
 @pytest.mark.skip(reason="don't ask")
 @pytest.fixture
-def mocked_responses():
+def mocked_responses(responses):
     with responses.RequestsMock() as rsps:
         yield rsps
 

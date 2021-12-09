@@ -23,9 +23,15 @@ def repository_yaml_check(repository_yaml):
 
     with open(repository_yaml, "r") as file:
         yamlfile = yaml.safe_load(file)
-        if yamlfile["repoVisibility"] == "public_0C3F0CE3E6E6448FAD341E7BFA50FCD333E06A20CFF05FCACE61154DDBBADF71":
+        if (
+            yamlfile["repoVisibility"]
+            == "public_0C3F0CE3E6E6448FAD341E7BFA50FCD333E06A20CFF05FCACE61154DDBBADF71"
+        ):
             return PUBLIC_RULES
-        elif yamlfile["repoVisibility"] == "private_12E5349CFB8BBA30AF464C24760B70343C0EAE9E9BD99156345DD0852C2E0F6F":
+        elif (
+            yamlfile["repoVisibility"]
+            == "private_12E5349CFB8BBA30AF464C24760B70343C0EAE9E9BD99156345DD0852C2E0F6F"
+        ):
             return PRIVATE_RULES
         else:
             print("no repository.yaml data found, searching against all rules")
@@ -76,7 +82,8 @@ def main(argv=None):
                 rule = detect_secret_in_line(line, filename)
                 if rule:
                     print(
-                        "Potentially sensitive string matching rule: {rule} found on line {line_number} of {file}".format(
+                        "Potentially sensitive string matching rule: {rule} "
+                        "found on line {line_number} of {file}".format(
                             rule=rule, line_number=i + 1, file=filename
                         )
                     )

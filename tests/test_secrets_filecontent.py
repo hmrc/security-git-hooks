@@ -3,15 +3,15 @@ import os
 
 from security_git_hooks import secrets_filecontent
 
-"""All comments at beginning of test sets 
-correspond to id of leak detection rules per 
+"""All comments at beginning of test sets
+correspond to id of leak detection rules per
  https://github.com/hmrc/app-config-base/blob/master/leak-detection.conf"""
 
 my_path = os.path.abspath(os.path.dirname(__file__))
 
 minimal = os.path.join(my_path, "resources/minimal.yaml")
 
-# aws_2
+# aws_secret_access_key
 
 
 @pytest.mark.parametrize(
@@ -20,22 +20,22 @@ minimal = os.path.join(my_path, "resources/minimal.yaml")
         (
             "aws_secret_access_key:H5xnFhnR3H/o6nrcfoMLR9VfOlfOY17pa/+PchnA",
             "afile.py",
-            "aws_2",
+            "aws_secret_access_key",
         ),
         (
             "aws_secret_access_key :   H5xnFhnR3H/o6nrcfoMLR9VfOlfOY17pa/+PchnA",
             "afile.txt",
-            "aws_2",
+            "aws_secret_access_key",
         ),
         (
             "aws_secret_access_key =   H5xnFhnR3H/o6nrcfoMLR9VfOlfOY17pa/+PchnA",
             "afile.md",
-            "aws_2",
+            "aws_secret_access_key",
         ),
         (
             "aws_secret_access_key=H5xnFhnR3H/o6nrcfoMLR9VfOlfOY17pa/+PchnA",
             "afile.py",
-            None,
+            "aws_secret_access_key",
         ),
         ("H5xnFhnR3H/o6nrcfoMLR9VfOlfOY17pa/+PchnA", "afile.py", None),
         (
@@ -55,7 +55,7 @@ minimal = os.path.join(my_path, "resources/minimal.yaml")
         ),
     ],
 )
-def test_aws_2(line, file, expected):
+def test_aws_secret_access_key(line, file, expected):
     assert secrets_filecontent.detect_secret_in_line(line, file) == expected
 
 
