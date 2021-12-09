@@ -31,6 +31,10 @@ FILE_NAME_REGEXES:
         pattern: ^\.*keychain$
     Keystore/Keyring file:
         pattern: ^key(store|ring)$
+    terraform state files 1:
+        pattern: ^\.*.tfstate.*$
+    terraform state files 2:
+        pattern: ^\.*.tfstate$
 
 PRIVATE_RULES:
     aws_secret_access_key:
