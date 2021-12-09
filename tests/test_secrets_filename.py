@@ -93,7 +93,7 @@ def test_private_key_9_ed25519(test_input, expected):
     "test_input,expected",
     [("fake_ecdsa", r"_ecdsa$"), ("_ecdsa.txt", None), ("fake_ecdsa.pub", None)],
 )
-def test_private_key_9_ed25519(test_input, expected):
+def test_private_key_9_ecdsa(test_input, expected):
     assert secrets_filename.detect_match_against_filename(test_input) == expected
 
 

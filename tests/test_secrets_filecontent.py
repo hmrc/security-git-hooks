@@ -3,8 +3,8 @@ import os
 
 from security_git_hooks import secrets_filecontent
 
-"""All comments at beginning of test sets 
-correspond to id of leak detection rules per 
+"""All comments at beginning of test sets
+correspond to id of leak detection rules per
  https://github.com/hmrc/app-config-base/blob/master/leak-detection.conf"""
 
 my_path = os.path.abspath(os.path.dirname(__file__))
