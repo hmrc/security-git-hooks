@@ -45,19 +45,19 @@ PRIVATE_RULES:
         exclusions: [kitchen.yaml$, kitchen.yml$]
     application_secret: 
         pattern: application\.secret\s*(=|:|->)\s*(?!(\s*ENC\[))
-        exclusions: [.scala$, /conf/application.conf$]
+        exclusions: [.scala$, conf/application.conf$]
     play_crypto_secret: 
         pattern: play\.crypto\.secret\s*(=|:|->)\s*(?!(\s*ENC\[))
-        exclusions: [.scala$, /conf/application.conf$]
+        exclusions: [.scala$, conf/application.conf$]
     play_http_secret_key:
         pattern: play\.http\.secret\.key\s*(=|:|->)\s*(?!(\s*(ENC\[|"some_secret")))
-        exclusions: [ .scala$, /conf/application.conf$ ]
+        exclusions: [ .scala$, conf/application.conf$ ]
     cookie_deviceId_secret: 
         pattern: cookie\.deviceId\.secret\s*(=|:|->)\s*(?!(\s*ENC\[))
-        exclusions: [.scala$, /conf/application.conf$]
+        exclusions: [.scala$, conf/application.conf$]
     sso_encryption_key: 
         pattern: sso\.encryption\.key\s*(=|:|->)\s*(?!(\s*ENC\[))
-        exclusions: [.scala$, /conf/application.conf$]
+        exclusions: [.scala$, conf/application.conf$]
 
 PUBLIC_RULES:
     ip_adresses:
@@ -71,19 +71,19 @@ PUBLIC_RULES:
         exclusions: [ kitchen.yaml$, kitchen.yml$ ]
     application_secret:
         pattern: application\.secret\s*(=|:|->)\s*(?!(\s*ENC\[))
-        exclusions: [ .scala$, /conf/application.conf$ ]
+        exclusions: [ .scala$, conf/application.conf$ ]
     play_crypto_secret:
         pattern: play\.crypto\.secret\s*(=|:|->)\s*(?!(\s*ENC\[))
-        exclusions: [ .scala$, /conf/application.conf$ ]
+        exclusions: [ .scala$, conf/application.conf$ ]
     play_http_secret_key:
         pattern: play\.http\.secret\.key\s*(=|:|->)\s*(?!(\s*(ENC\[|"some_secret")))
-        exclusions: [ .scala$, /conf/application.conf$ ]
+        exclusions: [ .scala$, conf/application.conf$ ]
     cookie_deviceId_secret:
         pattern: cookie\.deviceId\.secret\s*(=|:|->)\s*(?!(\s*ENC\[))
-        exclusions: [ .scala$, /conf/application.conf$ ]
+        exclusions: [ .scala$, conf/application.conf$ ]
     sso_encryption_key:
         pattern: sso\.encryption\.key\s*(=|:|->)\s*(?!(\s*ENC\[))
-        exclusions: [ .scala$, /conf/application.conf$ ]
+        exclusions: [ .scala$, conf/application.conf$ ]
 
 REPOSITORY_YAML_CONTENT:
     public: "public_0C3F0CE3E6E6448FAD341E7BFA50FCD333E06A20CFF05FCACE61154DDBBADF71"
