@@ -24,7 +24,7 @@ setup(
         ]
     },
     packages=find_packages(),
-    install_requires=["PyYAML", "requests"],
+    install_requires=["PyYAML", "requests", "setuptools"],
     tests_require=["pytest"],
     package_data={"": ["conf.yaml"]},
 )
