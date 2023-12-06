@@ -1,6 +1,6 @@
 repos:
 -   repo: https://github.com/hmrc/security-git-hooks
-    rev: v1.6.0
+    rev: release/1.9.0
     hooks:
     -   id: secrets_filename
         files: ''
