@@ -20,22 +20,22 @@ def repository_yaml_check(repository_yaml):
     - return rulesets according to value
 
     """
-
-    with open(repository_yaml, "r") as file:
-        yamlfile = yaml.safe_load(file)
-        if (
-            yamlfile["repoVisibility"]
-            == "public_0C3F0CE3E6E6448FAD341E7BFA50FCD333E06A20CFF05FCACE61154DDBBADF71"
-        ):
-            return PUBLIC_RULES
-        elif (
-            yamlfile["repoVisibility"]
-            == "private_12E5349CFB8BBA30AF464C24760B70343C0EAE9E9BD99156345DD0852C2E0F6F"
-        ):
-            return PRIVATE_RULES
-        else:
-            print("no repository.yaml data found, searching against all rules")
-            return PUBLIC_RULES
+    try:
+        with open(repository_yaml, "r") as file:
+            yamlfile = yaml.safe_load(file)
+            if (
+                yamlfile["repoVisibility"]
+                == "public_0C3F0CE3E6E6448FAD341E7BFA50FCD333E06A20CFF05FCACE61154DDBBADF71"
+            ):
+                return PUBLIC_RULES
+            elif (
+                yamlfile["repoVisibility"]
+                == "private_12E5349CFB8BBA30AF464C24760B70343C0EAE9E9BD99156345DD0852C2E0F6F"
+            ):
+                return PRIVATE_RULES
+    except FileNotFoundError:
+        print("no repository.yaml data found, searching against all rules")
+        return PUBLIC_RULES
 
 
 repository_yaml_check("repository.yaml")
