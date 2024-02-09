@@ -10,7 +10,7 @@ def read(filename):
 setup(
     name="security-git-hooks",
     author="HRMC Platform Security",
-    author_email="platsec.monitor@digital.hmrc.gov.uk",
+    author_email="",
     version=read(".version"),
     description="Detect secrets prior to commit",
     url="https://github.com/hmrc/security-git-hooks/",
