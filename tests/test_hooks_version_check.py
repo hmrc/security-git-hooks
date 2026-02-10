@@ -7,7 +7,6 @@ import json
 
 from security_git_hooks import hooks_version_check
 
-
 my_path = os.path.abspath(os.path.dirname(__file__))
 
 minimal = os.path.join(my_path, "resources/minimal.yaml")

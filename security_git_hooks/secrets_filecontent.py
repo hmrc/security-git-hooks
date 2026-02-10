@@ -70,24 +70,27 @@ def main(argv=None):
     exit_code = 0
 
     for filename in args.filenames:
-        with open(filename, "r") as f:
-            flag = False
-            for i, line in enumerate(f):
-                if re.search(conf.IGNORE_KEYWORD, line):
-                    flag = True
-                    continue
-                if flag:
-                    flag = False
-                    continue
-                rule = detect_secret_in_line(line, filename)
-                if rule:
-                    print(
-                        "Potentially sensitive string matching rule: {rule} "
-                        "found on line {line_number} of {file}".format(
-                            rule=rule, line_number=i + 1, file=filename
+        try:
+            with open(filename, "r") as f:
+                flag = False
+                for i, line in enumerate(f):
+                    if re.search(conf.IGNORE_KEYWORD, line):
+                        flag = True
+                        continue
+                    if flag:
+                        flag = False
+                        continue
+                    rule = detect_secret_in_line(line, filename)
+                    if rule:
+                        print(
+                            "Potentially sensitive string matching rule: {rule} "
+                            "found on line {line_number} of {file}".format(
+                                rule=rule, line_number=i + 1, file=filename
+                            )
                         )
-                    )
-                    exit_code = 1
+                        exit_code = 1
+        except UnicodeDecodeError:
+            print(f"Skipping binary file: {filename}")
     return exit_code
 
 
