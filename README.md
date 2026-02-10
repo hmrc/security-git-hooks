@@ -96,7 +96,7 @@ It is possible to test local changes to this repo in another repo without needin
 In the following example I have forked https://github.com/hmrc/security-git-hooks/ into https://github.com/deploymentking/security-git-hooks/.
 My folder structure is as follows...
 
-~/source/hmrc/
+~/source/
 ├── hmrc/
 │   └── aws-lambda-telemetry-slack-notifications/
 ├── deploymentking/
