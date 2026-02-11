@@ -112,3 +112,6 @@ pre-commit try-repo ../../deploymentking/security-git-hooks secrets_filename --v
 pre-commit try-repo ../../deploymentking/security-git-hooks secrets_filecontent --verbose --all-files
 pre-commit try-repo ../../deploymentking/security-git-hooks hooks_version_check --verbose --all-files
 ```
+
+## Making changes to this repository
+Please ensure you have incremented the version number in the `.version` file before a PR is merged to main.
