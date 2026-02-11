@@ -4,7 +4,6 @@ import requests
 import yaml
 import sys
 
-
 """This hook checks the security-git-hooks release contained in .pre-commit-config.yaml against
  the latest release from https://github.com/hmrc/security-git-hooks. It is an information only
  hook, and will always pass as to prevent the interruption of workflow, however it will produce

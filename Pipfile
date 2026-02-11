@@ -9,4 +9,4 @@ verify_ssl = true
 tox = "*"
 
 [requires]
-python_version = "3.9.1"
+python_version = "3.14.2"

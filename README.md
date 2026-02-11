@@ -1,6 +1,6 @@
 # security-git-hooks
 
-The purpose of these pre-commit Git hooks is to check file types and content against pre-defined rules in order to identify potentially sensitive information prior to commit. Managing sensitive content before it is committed to GitHub helps maintain our overall security posture, and also helps prevent the Leak Detection Service (LDS) triggering an alert, thus reducing the potential for secrets requiring manual removal from Git histories and for keys which would then require cycling.  
+The purpose of these pre-commit Git hooks is to check file types and content against pre-defined rules in order to identify potentially sensitive information prior to commit. Managing sensitive content before it is committed to GitHub helps maintain our overall security posture, and also helps prevent the Leak Detection Service (LDS) triggering an alert, thus reducing the potential for secrets requiring manual removal from Git histories and for keys which would then require cycling.
 
 *NOTE:* These hooks do not check for the presence of a `repository.yaml` file and have no relationship with the LDS exemptions defined there. Our pre-commit hooks use inline exclusions. Simply add a comment on the line above the content containing the string `LDS ignore`, and the hook will skip the line. **NB** - This functionality will soon be extended to the LDS itself - see [this ticket](https://jira.tools.tax.service.gov.uk/browse/BDOG-192) for details, however please be mindful that your `repository.yaml` exclusions will need to be maintained for now.
 
@@ -9,7 +9,7 @@ The purpose of these pre-commit Git hooks is to check file types and content aga
 `pip3 install pre-commit`
 
 
-## Getting started 
+## Getting started
 
 * Navigate to the root directory of a repository you wish to run hooks in.
 * Run the command: `pre-commit install`.
@@ -60,7 +60,7 @@ Potentially sensitive string matching rule: aws_secret_access_key found on line 
 ### Definitions
 * `repo` - Points to the repository containing the hook(s). Can be set to `local` for running/testing your own hooks, although additional information (which wouold usually be included in the `.pre-commit-hooks.yaml` is required if this is the case).
 
-* `hooks` - Declares the `id`, and optionally the local `name` of the hook. There are further options to include `language`,  `entrypoint`, and a list of any files to `exclude`. Although this information should not be included generally as it can be found in the `.pre-commit-hooks.yaml` file, the exclusions have been provided as part of the configuration file to provide additional user choice in this case. The default exclusions here are in line with the filetypes excluded by the Leak Detection Service itself, although any changes made to your exclusion list will not affect the Leak Detection Service.  
+* `hooks` - Declares the `id`, and optionally the local `name` of the hook. There are further options to include `language`,  `entrypoint`, and a list of any files to `exclude`. Although this information should not be included generally as it can be found in the `.pre-commit-hooks.yaml` file, the exclusions have been provided as part of the configuration file to provide additional user choice in this case. The default exclusions here are in line with the filetypes excluded by the Leak Detection Service itself, although any changes made to your exclusion list will not affect the Leak Detection Service.
 
 See [here](https://pre-commit.com/#plugins) for more information on the `.pre-commit-config.yaml` document format.
 
@@ -89,3 +89,26 @@ Pre-commit hooks themselves can be written in any language, however for a list o
 `hooks-version-check` - Checks the tag from your `.pre-commit-config.yaml` file against the latest tagged release in the repository. This is an information only hook, and will provide output but always pass.
 
 You can test the hooks by cloning this repository and running `tox` in the root directory.
+
+## Testing local changes before committing
+
+It is possible to test local changes to this repo in another repo without needing to commit or push those changes.
+In the following example I have forked https://github.com/hmrc/security-git-hooks/ into https://github.com/deploymentking/security-git-hooks/.
+My folder structure is as follows...
+
+~/source/
+├── hmrc/
+│   └── aws-lambda-telemetry-slack-notifications/
+├── deploymentking/
+│   └── security-git-hooks/
+
+
+```shell
+# Navigate to the repo in which I want to try out the new pre-commit hooks
+cd ~/source/hmrc/aws-lambda-telemetry-slack-notifications
+
+# Run try-repo commands, 1x for each as specified in .pre-commit-config.yaml
+pre-commit try-repo ../../deploymentking/security-git-hooks secrets_filename --verbose --all-files
+pre-commit try-repo ../../deploymentking/security-git-hooks secrets_filecontent --verbose --all-files
+pre-commit try-repo ../../deploymentking/security-git-hooks hooks_version_check --verbose --all-files
+```
